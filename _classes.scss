@@ -1,0 +1,91 @@
+@mixin border-radius($px) {
+   border-radius: $px $px $px $px;
+   -webkit-border-radius: $px;
+   -moz-border-radius: $px;
+}
+
+@mixin border-radius-top($px) {
+   -webkit-border-top-left-radius: $px;
+   -webkit-border-top-right-radius: $px;
+   -moz-border-radius-topleft: $px;
+   -moz-border-radius-topright: $px;
+   border-top-left-radius: $px;
+   border-top-right-radius: $px;
+}
+
+@mixin border-radius-bottom($px) {
+   -webkit-border-bottom-left-radius: $px;
+   -webkit-border-bottom-right-radius: $px;
+   -moz-border-radius-bottomleft: $px;
+   -moz-border-radius-bottomright: $px;
+   border-bottom-left-radius: $px;
+   border-bottom-right-radius: $px;
+}
+
+@mixin border-radius-right($px) {
+   -webkit-border-top-right-radius: $px;
+   -webkit-border-bottom-right-radius: $px;
+   -moz-border-radius-topright: $px;
+   -moz-border-radius-bottomright: $px;
+   border-top-right-radius: $px;
+   border-bottom-right-radius: $px;
+}
+
+@mixin border-radius-left($px) {
+   -webkit-border-top-left-radius: $px;
+   -webkit-border-bottom-left-radius: $px;
+   -moz-border-radius-topleft: $px;
+   -moz-border-radius-bottomleft: $px;
+   border-top-left-radius: $px;
+   border-bottom-left-radius: $px;
+}
+
+@mixin border-radius-top-right($px) {
+   -webkit-border-top-right-radius: $px;
+   -moz-border-radius-topright: $px;
+   border-top-right-radius: $px;
+}
+
+@mixin gradient($color1, $color2) {
+   background: $color1;														    /* old browsers */
+   background: -moz-linear-gradient(top, $color1 0%, $color2 100%);									    /* firefox */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(100%,$color2));			    /* webkit */
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#{$color1}', endColorstr='#{$color2}');		    /* IE6 & IE7 */
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='" + $color1 + "', endColorstr='" + $color2 + "')";/* IE8 */
+}
+
+@mixin complex-gradient($color1, $color2, $color3, $color4) {
+   background: $color1; /* old browsers */
+   background: -moz-linear-gradient(top, $color1 0%, $color2 50%, $color3 95%, $color4 100%); /* firefox */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$color1), color-stop(50%,$color2), color-stop(95%,$color3), color-stop(100%,$color4)); /* webkit */
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#{$color1}', endColorstr='#{$color2}');		    /* IE6 & IE7 */
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='" + $color1 + "', endColorstr='" + $color2 + "')";/* IE8 */
+}
+
+@mixin vertical-gradient($color1, $color2) {
+   background: $color1;														    /* old browsers */
+   background: -moz-linear-gradient(left, $color1 0%, $color2 100%);									    /* firefox */
+   background: -webkit-gradient(linear, left top, right top, color-stop(0%,$color1), color-stop(100%,$color2));			    /* webkit */
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#{$color1}', endColorstr='#{$color2}');		    /* IE6 & IE7 */
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='" + $color1 + "', endColorstr='" + $color2 + "')";/* IE8 */
+}
+
+@mixin box-shadow($x, $y, $spread, $color) {
+   -moz-box-shadow: $x $y $spread $color;
+   -webkit-box-shadow: $x $y $spread $color;
+   box-shadow: $x $y $spread $color;
+}
+
+@mixin rgba($hex, $alpha, $ie: $useIEFilters) {     
+  @if $ie == 1 { 
+    // this formula is not accurate enough, will be fixed with sass 3.1
+    $hexopac: $hex + ceil((($alpha * 255)/16) *10);
+    background-color: none;
+   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#{$hexopac}', endColorstr='#{$hexopac}');		    /* IE6 & IE7 */
+   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='" + $hexopac + "', endColorstr='" + $hexopac + "')";/* IE8 */
+  }
+  @else {
+    background-color: $hex;
+    background-color: rgba(red($hex), green($hex), blue($hex), $alpha);
+  }
+}
